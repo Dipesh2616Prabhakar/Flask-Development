@@ -1,27 +1,48 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2 class="mb-2 mx-4">Dashboard</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card mx-3 my-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title ">Total Employees</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/employee/list" class="btn btn-primary">Check</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="card mx-3 my-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title ">Departments</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/employee/list" class="btn btn-primary">Check</a>
-                </div>
-            </div>
-        </div>
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="container position-relative py-5">
+    <p class="text-uppercase small fw-bold mb-2" style="color:var(--gold); letter-spacing:0.15em;">Employee Management System</p>
+    <h1 class="hero-title">Your staff roster,<br>at a glance.</h1>
+    <p class="hero-sub">Search, sort, and manage every employee record from one place.</p>
+    <a href="/employee/list" class="btn btn-lg mt-2" style="background:var(--gold); color:#10192B; font-weight:600;">
+      <i class="bi bi-people-fill me-2"></i>Open Roster
+    </a>
+  </div>
+</div>
+
+<div class="container mt-n5 position-relative" style="z-index:2;">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="badge-card fade-in-up" style="animation-delay:0.05s;">
+        <i class="bi bi-people stat-icon"></i>
+        <div class="stat-label">Total Employees</div>
+        <div class="stat-accent"></div>
+        <div class="stat-number">{{ total_employees }}</div>
+        <a href="/employee/list" class="btn btn-sm btn-outline-dark mt-3">View Roster →</a>
+      </div>
     </div>
-
+    <div class="col-md-4">
+      <div class="badge-card fade-in-up" style="animation-delay:0.15s;">
+        <i class="bi bi-diagram-3 stat-icon"></i>
+        <div class="stat-label">Departments</div>
+        <div class="stat-accent"></div>
+        <div class="stat-number">{{ total_departments }}</div>
+        <a href="/employee/list" class="btn btn-sm btn-outline-dark mt-3">View Roster →</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="badge-card fade-in-up" style="animation-delay:0.25s;">
+        <i class="bi bi-person-plus stat-icon"></i>
+        <div class="stat-label">Quick Action</div>
+        <div class="stat-accent"></div>
+        <p class="text-muted mb-2" style="font-size:0.9rem;">Register a new staff member</p>
+        <a href="/employee/add" class="btn btn-sm" style="background:var(--gold); color:#10192B; font-weight:600;">+ Add Employee</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mb-5"></div>
 {% endblock %}

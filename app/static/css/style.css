@@ -1,13 +1,222 @@
+:root{
+  --ink:#10192B;
+  --paper:#F5F7FA;
+  --gold:#E3A008;
+  --slate:#33415C;
+  --line:#DDE3EC;
+  --success:#2F855A;
+  --danger:#C53030;
+}
+
 body{
-    background: wheat;
+  background: var(--paper);
+  color: var(--slate);
+  font-family: 'Inter', sans-serif;
 }
 
-h1{
-    color: rgb(65, 65, 219);
+h1,h2,h3,h4,h5{
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.02em;
 }
 
-table{
-    background-color: aliceblue;
-    border-width: 5px;
-    border-color: black;
+/* ---------- NAVBAR ---------- */
+.navbar{
+  background: var(--ink) !important;
+  padding: 0.9rem 0;
+}
+.navbar-brand{
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  color:#fff !important;
+  font-size:1.3rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.navbar-brand::before{
+  content:"";
+  width:10px;height:10px;
+  background: var(--gold);
+  border-radius:2px;
+  display:inline-block;
+}
+.nav-link{
+  color: rgba(255,255,255,0.75) !important;
+  font-weight:500;
+  font-size:0.92rem;
+}
+.nav-link:hover{ color:#fff !important; }
+.nav-link.active{
+  color:#fff !important;
+  border-bottom:2px solid var(--gold);
+}
+
+/* ---------- BADGE STAT CARDS (signature element) ---------- */
+.badge-card{
+  position:relative;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid var(--line);
+  padding:1.75rem 1.5rem 1.5rem;
+  overflow:visible;
+}
+.badge-card::before{
+  content:"";
+  position:absolute;
+  top:-8px; left:50%;
+  transform:translateX(-50%);
+  width:16px;height:16px;
+  background: var(--paper);
+  border:1px solid var(--line);
+  border-radius:50%;
+}
+.badge-card .stat-label{
+  text-transform:uppercase;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  color:#8492A6;
+  font-weight:600;
+}
+.badge-card .stat-number{
+  font-family:'JetBrains Mono', monospace;
+  font-size:2.6rem;
+  font-weight:600;
+  color: var(--ink);
+  line-height:1.2;
+}
+.badge-card .stat-accent{
+  width:36px;height:4px;
+  background: var(--gold);
+  border-radius:2px;
+  margin:0.5rem 0 0.75rem;
+}
+
+/* ---------- EMPLOYEE TABLE ---------- */
+.table{
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow: 0 1px 3px rgba(16,25,43,0.06);
+}
+.table thead th{
+  background: var(--ink) !important;
+  color:#fff;
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:600;
+  font-size:0.85rem;
+  border:none;
+}
+.table thead th a{ color:#fff !important; }
+.table tbody tr:hover{ background: #F0F4FA; }
+.table td, .table th{ vertical-align:middle; }
+
+.avatar-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;height:34px;
+  border-radius:8px;
+  background: var(--ink);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:0.85rem;
+  margin-right:0.6rem;
+}
+
+.dept-pill{
+  display:inline-block;
+  padding:0.2rem 0.65rem;
+  border-radius:20px;
+  background:#EAF0FB;
+  color: var(--ink);
+  font-size:0.78rem;
+  font-weight:600;
+}
+
+.salary-figure{
+  font-family:'JetBrains Mono', monospace;
+  font-weight:500;
+}
+
+/* ---------- FORMS / SEARCH PANEL ---------- */
+.card-header{
+  background: var(--ink);
+  color:#fff;
+  border-radius:10px 10px 0 0 !important;
+  font-family:'Space Grotesk',sans-serif;
+}
+.form-label{
+  font-weight:600;
+  font-size:0.85rem;
+  color: var(--slate);
+}
+.form-control:focus, .form-select:focus{
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.2rem rgba(227,160,8,0.15);
+}
+.btn-primary{
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.btn-primary:hover{
+  background:#1c2b45;
+  border-color:#1c2b45;
+}
+
+footer{
+  text-align:center;
+  padding:1.25rem 0;
+  color:#8492A6;
+  font-size:0.85rem;
+  border-top:1px solid var(--line);
+  margin-top:2.5rem;
+}
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  background: var(--ink);
+  overflow:hidden;
+  padding-bottom: 3rem;
+}
+.hero-grid{
+  position:absolute; inset:0;
+  background-image: radial-gradient(rgba(227,160,8,0.18) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+.hero-title{
+  color:#fff;
+  font-size:3rem;
+  font-weight:700;
+  line-height:1.15;
+}
+.hero-sub{
+  color: rgba(255,255,255,0.7);
+  font-size:1.1rem;
+  max-width:520px;
+  margin-bottom:1.5rem;
+}
+
+/* ---------- STAT ICON ---------- */
+.stat-icon{
+  position:absolute;
+  top:1.25rem; right:1.25rem;
+  font-size:1.4rem;
+  color: var(--gold);
+  opacity:0.5;
+}
+.badge-card{ position:relative; }
+
+/* ---------- MOTION ---------- */
+@keyframes fadeInUp{
+  from{ opacity:0; transform:translateY(16px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.fade-in-up{
+  animation: fadeInUp 0.5s ease both;
+}
+@media (prefers-reduced-motion: reduce){
+  .fade-in-up{ animation:none; }
 }

@@ -53,10 +53,70 @@ def register_employee():
 
 @employee_bp.route("/employee/list")
 def employee_list():
+    # --- read query parameters ---
+    page = request.args.get("page", 1, type=int)
+    per_page = request.args.get("per_page", 5, type=int)
+    search = request.args.get("search", "", type=str)
+    department = request.args.get("department", "", type=str)
+    min_salary = request.args.get("min_salary", type=float)
+    max_salary = request.args.get("max_salary", type=float)
+    sort_by = request.args.get("sort_by", "name", type=str)
+    order = request.args.get("order", "asc", type=str)
 
-    employees = Employee.query.all()
+    query = Employee.query
 
-    return render_template("employee.html", employees = employees)
+    # --- searching ---
+    if search:
+        pattern = f"%{search}%"
+        query = query.filter(
+            db.or_(
+                Employee.name.ilike(pattern),
+                Employee.email.ilike(pattern),
+                Employee.department.ilike(pattern)
+            )
+        )
+
+    # --- filtering ---
+    if department:
+        query = query.filter(Employee.department == department)
+
+    if min_salary is not None:
+        query = query.filter(Employee.salary >= min_salary)
+
+    if max_salary is not None:
+        query = query.filter(Employee.salary <= max_salary)
+
+    # --- sorting ---
+    sort_columns = {
+        "name": Employee.name,
+        "email": Employee.email,
+        "department": Employee.department,
+        "salary": Employee.salary,
+    }
+    sort_column = sort_columns.get(sort_by, Employee.name)
+    sort_column = sort_column.desc() if order == "desc" else sort_column.asc()
+    query = query.order_by(sort_column)
+
+    # --- pagination ---
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    employees = pagination.items
+
+    # for the department filter dropdown
+    departments = [d[0] for d in db.session.query(Employee.department).distinct().all()]
+
+    return render_template(
+        "employee.html",
+        employees=employees,
+        pagination=pagination,
+        departments=departments,
+        search=search,
+        department=department,
+        min_salary=min_salary,
+        max_salary=max_salary,
+        sort_by=sort_by,
+        order=order,
+        per_page=per_page,
+    )
 
 
 from app.models import db

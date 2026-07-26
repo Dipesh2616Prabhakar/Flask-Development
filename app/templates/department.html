@@ -1,5 +1,29 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Department Page</h1>
+<div class="container mt-4">
+  <p class="text-uppercase small fw-bold text-secondary mb-1" style="letter-spacing:0.1em;">Organization</p>
+  <h2 class="mb-4">Departments</h2>
+
+  {% if departments %}
+  <div class="row g-4">
+    {% for dept in departments %}
+    <div class="col-md-4">
+      <div class="badge-card">
+        <i class="bi bi-diagram-3 stat-icon"></i>
+        <div class="stat-label">{{ dept.name }}</div>
+        <div class="stat-accent"></div>
+        <div class="stat-number">{{ dept.count }}</div>
+        <p class="text-muted mb-2" style="font-size:0.85rem;">
+          {{ "employee" if dept.count == 1 else "employees" }} · avg salary
+          <span class="salary-figure">₹{{ "{:,.2f}".format(dept.avg_salary) }}</span>
+        </p>
+        <a href="/employee/list?department={{ dept.name }}" class="btn btn-sm btn-outline-dark mt-1">View Staff →</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-warning">No departments found yet. Add an employee to get started.</div>
+  {% endif %}
+</div>
 {% endblock %}

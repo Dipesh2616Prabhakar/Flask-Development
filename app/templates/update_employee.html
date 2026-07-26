@@ -1,40 +1,38 @@
 {% extends "base.html" %} {% block content %}
-
-<div class="card">
-  <div class="card-header">
-    <h3>Update Employee</h3>
-  </div>
-
-  <div class="card-body">
-    <form action="/employee/employeeUpdate/{{employee.id}}" method="POST">
+<div class="container mt-4" style="max-width: 600px;">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="mb-0">Update Employee</h4>
+    </div>
+    <div class="card-body p-4">
+      <form action="/employee/employeeUpdate/{{employee.id}}" method="POST">
         <div class="mb-3">
-            <label>Name : </label>
-            <input type="text" name="name" value="{{employee.name}}" class="form-control px-4" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Email : </label>
-            <input type="email" name="email" value="{{employee.email}}" class="form-control px-4" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Password : </label>
-            <input type="text" name="password" value="{{employee.password}}" class="form-control px-4" required>
-        </div>
-
-        <div class="mb-3">
-            <label>Salary : </label>
-            <input type="text" name="salary" value="{{employee.salary}}" class="form-control px-4" required>
+          <label class="form-label">Name</label>
+          <input type="text" name="name" value="{{employee.name}}" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label>Department : </label>
-            <input type="text" name="department" value="{{employee.department}}" class="form-control px-4" required>
+          <label class="form-label">Email</label>
+          <input type="email" name="email" value="{{employee.email}}" class="form-control" required>
         </div>
-
-        <button class="btn btn-warning"> Update </button>
-        <button class="btn btn-primary"> Reset </button>
-    </form>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" value="{{employee.password}}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Salary</label>
+          <input type="number" step="0.01" name="salary" value="{{employee.salary}}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Department</label>
+          <input type="text" name="department" value="{{employee.department}}" class="form-control" required>
+        </div>
+        <div class="d-flex gap-2 mt-4">
+          <button type="submit" class="btn btn-warning">Update</button>
+          <button type="reset" class="btn btn-outline-secondary">Reset</button>
+          <a href="/employee/list" class="btn btn-outline-dark ms-auto">Cancel</a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-
 {% endblock %}
